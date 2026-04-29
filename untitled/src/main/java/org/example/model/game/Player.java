@@ -1,0 +1,34 @@
+package org.example.model.game;
+
+public class Player {
+
+    private int money;
+    private int score;
+
+    public Player(int initialMoney) {
+        this.money = initialMoney;
+        this.score = 0;
+    }
+
+    public boolean canAfford(int cost) {
+        return money >= cost;
+    }
+
+    public void spend(int amount) {
+        if (!canAfford(amount)) {
+            throw new IllegalStateException("No alcanza con ese dinero");
+        }
+        money -= amount;
+    }
+
+    public void earnMoney(int amount) {
+        money += amount;
+    }
+
+    public void addScore(int points) {
+        score += points;
+    }
+
+    public int getMoney() { return money; }
+    public int getScore() { return score; }
+}

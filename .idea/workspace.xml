@@ -46,6 +46,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "JUnit.EnemyTest.executor": "Run",
+    "JUnit.PlayerTest.executor": "Run",
     "JUnit.ProjectileTest.executor": "Run",
     "JUnit.RouteTest.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
@@ -74,7 +75,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.RouteTest">
+  <component name="RunManager" selected="JUnit.PlayerTest">
     <configuration name="EnemyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="pushmaindefense" />
       <extension name="coverage">
@@ -85,6 +86,21 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.example.model.enemy" />
       <option name="MAIN_CLASS_NAME" value="org.example.model.enemy.EnemyTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlayerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="pushmaindefense" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.model.game.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.model.game" />
+      <option name="MAIN_CLASS_NAME" value="org.example.model.game.PlayerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -122,6 +138,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PlayerTest" />
         <item itemvalue="JUnit.RouteTest" />
         <item itemvalue="JUnit.ProjectileTest" />
         <item itemvalue="JUnit.EnemyTest" />
