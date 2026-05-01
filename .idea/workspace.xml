@@ -5,11 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="386af3d4-68cc-470a-adb1-dd6bfe29b2b0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/enemy/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/enemy/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/enemy/MediumEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/enemy/MediumEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/enemy/StrongEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/enemy/StrongEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/enemy/WeakEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/enemy/WeakEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/game/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/level/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/level/Point.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,20 +65,33 @@
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "develop",
+    "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_directory_selection": "/home/jean-luka-arena/IdeaProjects/fiuba/paradigmas/tp1-2026c1-pushmaindefense/untitled/src/main/java/org/example/model/enemy",
+    "last_opened_file_path": "/Users/sebas/Desktop/2026/paradigmas/tp1-2026c1-pushmaindefense/untitled/src/main/java/org/example/model/game",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "editor.preferences.completion.popup"
+    "settings.editor.selected.configurable": "editor.preferences.completion.popup",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/untitled/src/main/java/org/example/model/game" />
+      <recent name="$PROJECT_DIR$/untitled/src/main/java/org/example/model/base" />
+      <recent name="$PROJECT_DIR$/untitled/src/main/java/org/example/model/tower" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/untitled/src/main/java/org/example/model/player" />
       <recent name="$PROJECT_DIR$/untitled/src/main/java" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -161,6 +176,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1776278185667</updated>
+      <workItem from="1777606779894" duration="16058000" />
     </task>
     <servers />
   </component>
@@ -177,5 +193,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

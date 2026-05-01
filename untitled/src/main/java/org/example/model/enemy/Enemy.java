@@ -1,4 +1,9 @@
 package org.example.model.enemy;
+import org.example.model.level.Route;
+import org.example.model.level.Point;
+import org.example.model.tower.Tower;
+
+import java.util.List;
 
 public abstract class Enemy {
 
@@ -9,15 +14,17 @@ public abstract class Enemy {
     private final int scoreValue; ///es el puntaje que podemos mostrar x pantalla que vamos acumulando, mepa que es opcional pero lo pongo x las dudas
     private double x;
     private double y; /// este y x es para mover al frame a frame siguiendo la ruta
+    private double speed;
     private int routeIndex; /// esto es xq la ruta va a tener una lista de punts y necesitamos un numero dice hacia que punto se está moviendo el enemigo
     private boolean alive; /// esto es para saber si sigue vivo o caduco
 
-    protected Enemy(int health, int damage, int reward, int scoreValue) {
+    protected Enemy(int health, int damage, int reward, int scoreValue, double speed) {
         this.health = health;
         this.maxHealth = health;
         this.damage = damage;
         this.reward = reward;
         this.scoreValue = scoreValue;
+        this.speed = speed;
         this.routeIndex = 0;
         this.alive = true;
     }
@@ -28,6 +35,33 @@ public abstract class Enemy {
             this.health = 0;
             this.alive = false;
         }
+    }
+
+    // maneja logica de todos los metodos, funcionamiento independiente a main
+    public void update(Route route, double deltaTime) {
+        if (!alive) return;
+        if (routeIndex >= route.size()) return;
+
+        Point target = route.getPoint(routeIndex);
+        double dx = target.getX() - x;
+        double dy = target.getY() - y;
+
+        double distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance < speed * deltaTime) {
+            moveTo(target.getX(), target.getY());
+            routeIndex++;
+            return;
+        }
+
+        // movimiento normal, ajusta para q no haya bugs con fps, q no se pase
+        double ratio = (speed * deltaTime) / distance;
+        double newX = x + dx * ratio;
+        double newY = y + dy * ratio;
+        moveTo(newX, newY);
+    }
+
+    public boolean hasReachedEnd(Route route) {
+        return route.isLastPoint(routeIndex);
     }
 
     public boolean isAlive() {
@@ -56,6 +90,6 @@ public abstract class Enemy {
     public double getY() { return y; }
     public int getRouteIndex() { return routeIndex; }
 
-    public abstract double getSpeed();
+    public double getSpeed(){return speed;};
     public abstract String getType();
 }

@@ -1,4 +1,4 @@
-package org.example.model.game;
+package org.example.model.player;
 
 public class Player {
 

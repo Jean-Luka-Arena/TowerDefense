@@ -9,12 +9,7 @@ public class MediumEnemy extends Enemy {
     private static final double SPEED = 60.0;
 
     public MediumEnemy() {
-        super(HEALTH, DAMAGE, REWARD, SCORE_VALUE);
-    }
-
-    @Override
-    public double getSpeed() {
-        return SPEED;
+        super(HEALTH, DAMAGE, REWARD, SCORE_VALUE,SPEED);
     }
 
     @Override

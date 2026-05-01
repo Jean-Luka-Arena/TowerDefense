@@ -9,12 +9,7 @@ public class StrongEnemy extends Enemy {
     private static final double SPEED = 40.0;
 
     public StrongEnemy() {
-        super(HEALTH, DAMAGE, REWARD, SCORE_VALUE);
-    }
-
-    @Override
-    public double getSpeed() {
-        return SPEED;
+        super(HEALTH, DAMAGE, REWARD, SCORE_VALUE,SPEED);
     }
 
     @Override
