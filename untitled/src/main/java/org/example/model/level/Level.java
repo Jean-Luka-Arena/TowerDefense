@@ -1,29 +1,26 @@
 package org.example.model.level;
 
-
-import org.example.model.enemy.EnemyChance;
-
+import org.example.model.enemy.ScheduledEnemy;
 import java.util.List;
 
 public class Level {
-    private final List<EnemyChance> chances;
-    private final int totalEnemies;
+    private final List<ScheduledEnemy> scheduledEnemies;
     private final double spawnInterval;
 
-    public Level(List<EnemyChance> chances,int totalEnemies,double spawnInterval) {
-        this.chances = chances;
-        this.totalEnemies = totalEnemies;
+    public Level(List<ScheduledEnemy> scheduledEnemies, double spawnInterval) {
+        this.scheduledEnemies = scheduledEnemies;
         this.spawnInterval = spawnInterval;
     }
-    public List<EnemyChance> getChances() {
-        return chances;
+
+    public List<ScheduledEnemy> getScheduledEnemies() {
+        return scheduledEnemies;
     }
+
     public int getTotalEnemies() {
-        return totalEnemies;
+        return scheduledEnemies.size();
     }
 
     public double getSpawnInterval() {
         return spawnInterval;
     }
-
 }

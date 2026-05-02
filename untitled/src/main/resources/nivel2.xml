@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level>
+    <initialMoney>100</initialMoney>
+    <spawnInterval>2.0</spawnInterval>
+    <route>
+        <point x="0"   y="300"/>
+        <point x="200" y="300"/>
+        <point x="200" y="100"/>
+        <point x="600" y="100"/>
+    </route>
+    <towerSlots>
+        <slot x="200" y="200"/>
+        <slot x="400" y="150"/>
+        <slot x="500" y="100"/>
+    </towerSlots>
+    <initialTowers/>
+    <enemies>
+        <spawn type="WEAK" delay="0"/>
+        <spawn type="FAST" delay="2000"/>
+        <spawn type="WEAK" delay="4000"/>
+        <spawn type="TANK" delay="6000"/>
+        <spawn type="FAST" delay="8000"/>
+        <spawn type="TANK" delay="10000"/>
+    </enemies>
+</level>
