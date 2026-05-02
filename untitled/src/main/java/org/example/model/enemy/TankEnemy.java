@@ -1,6 +1,6 @@
 package org.example.model.enemy;
 
-public class StrongEnemy extends Enemy {
+public class TankEnemy extends Enemy {
 
     private static final int HEALTH = 3;
     private static final int DAMAGE = 3;
@@ -8,7 +8,7 @@ public class StrongEnemy extends Enemy {
     private static final int SCORE_VALUE = 30;
     private static final double SPEED = 40.0;
 
-    public StrongEnemy() {
+    public TankEnemy() {
         super(HEALTH, DAMAGE, REWARD, SCORE_VALUE,SPEED);
     }
 

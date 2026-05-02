@@ -7,10 +7,15 @@
     <list default="true" id="386af3d4-68cc-470a-adb1-dd6bfe29b2b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/enemy/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/enemy/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/game/game.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/level/Route.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/level/Route.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/player/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/player/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/tower/TowerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/tower/TowerFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/enemy/EnemyFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/enemy/EnemyFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/enemy/MediumEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/enemy/FastEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/enemy/StrongEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/enemy/TankEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/level/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/point/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/level/Route.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/route/Route.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/tower/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/tower/Tower.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled/src/test/java/org/example/model/enemy/EnemyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/test/java/org/example/model/enemy/EnemyTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled/src/test/java/org/example/model/level/RouteTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/test/java/org/example/model/level/RouteTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +25,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -53,6 +59,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
     "JUnit.EnemyTest.executor": "Run",
     "JUnit.PlayerTest.executor": "Run",
     "JUnit.ProjectileTest.executor": "Run",
@@ -98,7 +105,20 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PlayerTest">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.Main" />
+      <module name="untitled" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="EnemyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="pushmaindefense" />
       <extension name="coverage">
@@ -148,7 +168,7 @@
       <module name="pushmaindefense" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.model.level.*" />
+          <option name="PATTERN" value="org.example.model.route.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -161,6 +181,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.PlayerTest" />
         <item itemvalue="JUnit.RouteTest" />
         <item itemvalue="JUnit.ProjectileTest" />

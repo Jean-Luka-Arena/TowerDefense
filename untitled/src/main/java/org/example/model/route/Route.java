@@ -1,15 +1,26 @@
-package org.example.model.level;
+package org.example.model.route;
+import org.example.model.point.Point;
+
 import java.util.List;
 
 public class Route {
 
-    private static List<Point> points;
+    private final List<Point> points;
+    private final List<Point> towerSpots;
 
-    public Route(List<Point> points) {
+    public Route(List<Point> points, List<Point> towerSpots) {
         if (points == null || points.size() < 2) {
             throw new IllegalArgumentException("la ruta debe tener al menos dos puntos");
         }
+        if (towerSpots == null || towerSpots.size() < 2) {
+            throw new IllegalArgumentException("No hay casilleros para torretas");
+        }
         this.points = List.copyOf(points);
+        this.towerSpots = List.copyOf(towerSpots);
+    }
+
+    public List<Point> getTowerSpots() {
+        return towerSpots;
     }
 
     public Point getPoint(int index) {

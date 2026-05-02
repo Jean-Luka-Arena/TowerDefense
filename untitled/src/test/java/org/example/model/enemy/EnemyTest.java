@@ -22,7 +22,7 @@ public class EnemyTest {
 
     @Test
     void enemyDoesNotDieWithPartialDamage() {
-        Enemy enemy = new MediumEnemy();
+        Enemy enemy = new FastEnemy();
         enemy.takeDamage(1);
         assertTrue(enemy.isAlive());
     }
@@ -31,8 +31,8 @@ public class EnemyTest {
     void factoryCreatesCorrectTypes() {
         EnemyFactory factory = new EnemyFactory();
         assertInstanceOf(WeakEnemy.class,   factory.create("weak"));
-        assertInstanceOf(MediumEnemy.class, factory.create("medium"));
-        assertInstanceOf(StrongEnemy.class, factory.create("strong"));
+        assertInstanceOf(FastEnemy.class, factory.create("medium"));
+        assertInstanceOf(TankEnemy.class, factory.create("strong"));
     }
 
     @Test

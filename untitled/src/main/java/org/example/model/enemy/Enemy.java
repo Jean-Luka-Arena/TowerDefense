@@ -1,9 +1,6 @@
 package org.example.model.enemy;
-import org.example.model.level.Route;
-import org.example.model.level.Point;
-import org.example.model.tower.Tower;
-
-import java.util.List;
+import org.example.model.route.Route;
+import org.example.model.point.Point;
 
 public abstract class Enemy {
 
@@ -61,7 +58,8 @@ public abstract class Enemy {
     }
 
     public boolean hasReachedEnd(Route route) {
-        return route.isLastPoint(routeIndex);
+        Point base = route.getBasePoint();
+        return this.x == base.getX() && this.y == base.getY();
     }
 
     public boolean isAlive() {

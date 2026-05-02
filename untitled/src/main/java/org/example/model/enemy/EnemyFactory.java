@@ -1,13 +1,14 @@
 package org.example.model.enemy;
 
+//creador de tipo de enemigo
+
 public class EnemyFactory {
 
-    public Enemy create(String type) {
-        return switch (type.toLowerCase()) {
-            case "weak"   -> new WeakEnemy();
-            case "medium" -> new MediumEnemy();
-            case "strong" -> new StrongEnemy();
-            default -> throw new IllegalArgumentException("Unknown enemy type: " + type);
+    public Enemy create(EnemyType type) {
+        return switch (type) {
+            case WEAK   -> new WeakEnemy();
+            case FAST   -> new FastEnemy();
+            case TANK   -> new TankEnemy();
         };
     }
 }
