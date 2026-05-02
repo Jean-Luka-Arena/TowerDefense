@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Route {
 
-    private final List<Point> points;
+    private static List<Point> points;
 
     public Route(List<Point> points) {
         if (points == null || points.size() < 2) {

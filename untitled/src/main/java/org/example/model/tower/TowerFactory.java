@@ -1,4 +1,4 @@
-ample.model.tower;
+package org.example.model.tower;
 
 public class TowerFactory {
 

@@ -14,7 +14,7 @@ public abstract class Enemy {
     private final int scoreValue; ///es el puntaje que podemos mostrar x pantalla que vamos acumulando, mepa que es opcional pero lo pongo x las dudas
     private double x;
     private double y; /// este y x es para mover al frame a frame siguiendo la ruta
-    private double speed;
+    private final double speed;
     private int routeIndex; /// esto es xq la ruta va a tener una lista de punts y necesitamos un numero dice hacia que punto se está moviendo el enemigo
     private boolean alive; /// esto es para saber si sigue vivo o caduco
 

@@ -5,8 +5,8 @@ public class Player {
     private int money;
     private int score;
 
-    public Player(int initialMoney) {
-        this.money = initialMoney;
+    public Player() {
+        this.money = 100;
         this.score = 0;
     }
 
