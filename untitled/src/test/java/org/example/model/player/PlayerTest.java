@@ -1,5 +1,6 @@
-package org.example.model.game;
+package org.example.model.player;
 
+import org.example.model.player.Player;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
