@@ -11,4 +11,7 @@ public class PowerfulTower extends Tower {
         super(DAMAGE, PRICE, RANGE, SHOTSPEED);
     }
 
+    @Override
+    public String getType() { return "powerful"; }
+
 }

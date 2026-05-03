@@ -10,10 +10,13 @@ public abstract class Enemy {
     private final int reward; ///son las monedas que ganás al matar un enemigo
     private final int scoreValue; ///es el puntaje que podemos mostrar x pantalla que vamos acumulando, mepa que es opcional pero lo pongo x las dudas
     private double x;
-    private double y; /// este y x es para mover al frame a frame siguiendo la ruta
+    private double y; /// pos en la que esta el enemigo
     private final double speed;
     private int routeIndex; /// esto es xq la ruta va a tener una lista de punts y necesitamos un numero dice hacia que punto se está moviendo el enemigo
     private boolean alive; /// esto es para saber si sigue vivo o caduco
+    private double dx; // dirección a la que apunta el enemigo
+    private double dy;
+    private double animTime = 0;
 
     protected Enemy(int health, int damage, int reward, int scoreValue, double speed) {
         this.health = health;
@@ -24,6 +27,8 @@ public abstract class Enemy {
         this.speed = speed;
         this.routeIndex = 0;
         this.alive = true;
+        this.dx = 1;
+        this.dy = 0;
     }
 
     public void takeDamage(int amount) {
@@ -39,11 +44,19 @@ public abstract class Enemy {
         if (!alive) return;
         if (routeIndex >= route.size()) return;
 
+        animTime += deltaTime;
+
         Point target = route.getPoint(routeIndex);
         double dx = target.getX() - x;
         double dy = target.getY() - y;
-
         double distance = Math.sqrt(dx * dx + dy * dy);
+
+        //direccion normalizada
+        if (distance > 0) {
+            this.dx = dx / distance;
+            this.dy = dy / distance;
+        }
+
         if (distance < speed * deltaTime) {
             moveTo(target.getX(), target.getY());
             routeIndex++;
@@ -87,6 +100,9 @@ public abstract class Enemy {
     public double getX() { return x; }
     public double getY() { return y; }
     public int getRouteIndex() { return routeIndex; }
+    public double getDx() { return dx; }
+    public double getDy() { return dy; }
+    public double getAnimTime() { return animTime; }
 
     public double getSpeed(){return speed;};
     public abstract String getType();

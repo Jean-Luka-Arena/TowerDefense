@@ -101,6 +101,31 @@ public class Game {
         return true;
     }
 
+    public void placeOrReplaceTower(Tower newTower, Point point) {
+
+        for (int i = 0; i < towers.size(); i++) {
+            Tower existing = towers.get(i);
+
+            if ((int)existing.getX() == point.getX() &&
+                    (int)existing.getY() == point.getY()) {
+                if (existing.getType().equals(newTower.getType())) {
+                    throw new IllegalArgumentException("Misma torre");
+                }
+                newTower.setPosition(point.getX(), point.getY());
+                towers.set(i, newTower);
+                return;
+            }
+        }
+
+        // si no había torre → colocar normal
+        if (!route.getTowerSpots().contains(point)) {
+            throw new IllegalArgumentException("Slot inválido");
+        }
+
+        newTower.setPosition(point.getX(), point.getY());
+        towers.add(newTower);
+    }
+
     public void addTower(Tower tower, Point point) {
         if (canPlaceTower(point)) {
             tower.setPosition(point.getX(), point.getY());
@@ -118,6 +143,8 @@ public class Game {
         return enemies.isEmpty() && nextEnemyIndex >= level.getTotalEnemies();
     }
 
+    public List<Projectile> getProjectiles() { return projectiles; }
+    public Route getRoute() { return route; }
     public Base getBase() { return base; }
     public Player getPlayer() { return player; }
     public List<Enemy> getEnemies() { return enemies; }

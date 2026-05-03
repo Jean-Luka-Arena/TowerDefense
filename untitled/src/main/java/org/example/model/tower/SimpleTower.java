@@ -11,4 +11,7 @@ public class SimpleTower extends Tower {
         super(DAMAGE, PRICE, RANGE, SHOTSPEED);
     }
 
+    @Override
+    public String getType() { return "simple"; }
+
 }

@@ -13,6 +13,7 @@ public abstract class Tower {
     private final int shotSpeed; /// cadencia de disparo
     private double x,y; /// posicion de la torreta
     private long timeLastShot; /// tiempo ultimo disparo
+    private Enemy currentTarget;
 
     protected Tower(int damage, int price, int range, int shotSpeed) {
         this.damage=damage;
@@ -25,7 +26,12 @@ public abstract class Tower {
         if (enemy == null) return null;
         if (!canShoot()) return null;
         timeLastShot = System.currentTimeMillis();
-        return new Projectile(x, y, enemy, damage);
+        double dx = enemy.getX() - x;
+        double dy = enemy.getY() - y;
+        double dist = Math.sqrt(dx*dx + dy*dy);
+        double offsetX = dist > 0 ? (dx/dist) * 50 : 0;
+        double offsetY = dist > 0 ? (dy/dist) * 50 : 0;
+        return new Projectile(x + offsetX, y + offsetY, enemy, damage,getType());
     }
 
     public boolean canShoot(){
@@ -60,8 +66,8 @@ public abstract class Tower {
     }
 
     public Projectile update(List<Enemy> enemies){
-        Enemy enemy = findFirstEnemyInRange(enemies);
-        return shoot(enemy);
+        currentTarget = findFirstEnemyInRange(enemies);
+        return shoot(currentTarget);
     }
 
 
@@ -77,6 +83,8 @@ public abstract class Tower {
 
     public double getX() { return x; }
     public double getY() { return y; }
+    public abstract String getType();
     public long getTimeLastShot() { return timeLastShot; }
+    public Enemy getCurrentTarget() { return currentTarget; }
 
 }

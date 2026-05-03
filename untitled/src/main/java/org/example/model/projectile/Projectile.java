@@ -8,16 +8,17 @@ public class Projectile {
     private final double speed; /// velocidad a la que va (en pixeles por segundo)
     private Enemy target; /// referencia al enemigo al que persigue, se va a ir actualizando a medida que este avance (persigue al enemigo basicamente)
     private boolean active; /// estado del proyectil, se desactiva cuando impacta al enemigo o cuando el enemigo muere antes de que llegue.
-
+    private final String towerType;
     private static final double SPEED = 200.0;
 
-    public Projectile(double x, double y, Enemy target, int damage) {
+    public Projectile(double x, double y, Enemy target, int damage,String towerType) {
         this.x = x;
         this.y = y;
         this.target = target;
         this.damage = damage;
         this.speed = SPEED;
         this.active = true;
+        this.towerType = towerType;
     }
 
     public void update(double deltaTime) {
@@ -47,5 +48,18 @@ public class Projectile {
     public double getX() { return x; }
     public double getY() { return y; }
     public int getDamage() { return damage; }
+
+    public double getDx() {
+        if (target == null || target.isDead()) return 0;
+        return target.getX() - x;
+    }
+
+    public double getDy() {
+        if (target == null || target.isDead()) return 0;
+        return target.getY() - y;
+    }
+
+    public String getTowerType() { return towerType; }
+
     public Enemy getTarget() { return target; }
 }
