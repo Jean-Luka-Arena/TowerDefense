@@ -26,12 +26,12 @@ Juego Tower Defense implementado en Java con JavaFX. El jugador defiende su base
 
 ## Instrucciones de ejecución
 Cómo ejecutar: 
+
 Requiere Java 21 y Maven.
 
-git clone <url-del-repositorio>
-cd tp1-2026c1-pushmaindefense/untitled
-
-mvn javafx:run
+-git clone <url-del-repositorio>
+-cd tp1-2026c1-pushmaindefense/untitled
+-mvn javafx:run
 
 ## instrucciones de juego
 El objetivo es destruir todos los enemigos antes de que lleguen a tu base. La base empieza con 10 de vida.
