@@ -1,7 +1,6 @@
-package org.example.model.level;
+package org.example.model.route;
 
 import org.example.model.point.Point;
-import org.example.model.route.Route;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;

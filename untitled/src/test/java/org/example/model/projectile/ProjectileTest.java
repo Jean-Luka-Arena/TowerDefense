@@ -68,7 +68,7 @@ public class ProjectileTest {
         Projectile p = new Projectile(0, 0, enemy, 1, "simple");
         p.update(1.0); // impacta y se desactiva
         assertFalse(p.isActive());
-        // segunda llamada a update no lanza excepción
+        // segunda llamada a update no lanza excepcioon
         assertDoesNotThrow(() -> p.update(1.0));
     }
 

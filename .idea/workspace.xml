@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="386af3d4-68cc-470a-adb1-dd6bfe29b2b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/untitled/src/test/java/org/example/model/enemy/EnemyTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/test/java/org/example/model/enemy/EnemyTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/untitled/src/test/java/org/example/model/game/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/test/java/org/example/model/game/GameIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/untitled/src/test/java/org/example/model/level/RouteTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/test/java/org/example/model/level/RouteTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/untitled/src/test/java/org/example/model/level/RouteTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/test/java/org/example/model/route/RouteTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/untitled/src/test/java/org/example/model/projectile/ProjectileTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/test/java/org/example/model/projectile/ProjectileTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,6 +57,7 @@
     "JUnit.PlayerTest.executor": "Run",
     "JUnit.ProjectileTest.executor": "Run",
     "JUnit.RouteTest.executor": "Run",
+    "JUnit.org.example.model in pushmaindefense.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -96,6 +95,7 @@
       <recent name="$PROJECT_DIR$/untitled/src/main/java" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.example.model.route" />
       <recent name="org.example.model.enemy" />
       <recent name="" />
     </key>
@@ -192,8 +192,8 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.example.model.level" />
-      <option name="MAIN_CLASS_NAME" value="org.example.model.level.RouteTest" />
+      <option name="PACKAGE_NAME" value="org.example.model.route" />
+      <option name="MAIN_CLASS_NAME" value="org.example.model.route.RouteTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
