@@ -29,7 +29,7 @@ Cómo ejecutar:
 
 Requiere Java 21 y Maven.
 
--git clone <url-del-repositorio>
+-git clone `<url-del-repositorio>`
 
 -cd tp1-2026c1-pushmaindefense/untitled
 
