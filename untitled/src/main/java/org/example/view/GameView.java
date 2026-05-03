@@ -21,6 +21,7 @@ import org.example.view.sound.SoundManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class GameView {
 
@@ -195,7 +196,7 @@ public class GameView {
             String imgPath = t[1];
             String label   = t[2];
 
-            ImageView iv = new ImageView(new Image(getClass().getResourceAsStream(imgPath)));
+            ImageView iv = new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream(imgPath))));
             iv.setFitWidth(48);
             iv.setFitHeight(48);
             iv.setPreserveRatio(true);

@@ -2,6 +2,8 @@ package org.example.view.sound;
 
 import javafx.scene.media.AudioClip;
 
+import java.util.Objects;
+
 public class SoundManager {
 
     private final AudioClip disparoClip;
@@ -11,11 +13,11 @@ public class SoundManager {
     private final AudioClip victoryClip;
 
     public SoundManager() {
-        disparoClip  = new AudioClip(getClass().getResource("/sounds/disparo_short.mp3").toExternalForm());
-        misilClip    = new AudioClip(getClass().getResource("/sounds/misil_short.mp3").toExternalForm());
-        fondoClip    = new AudioClip(getClass().getResource("/sounds/fondo.mp3").toExternalForm());
-        gameOverClip = new AudioClip(getClass().getResource("/sounds/game_over.mp3").toExternalForm());
-        victoryClip  = new AudioClip(getClass().getResource("/sounds/victory.mp3").toExternalForm());
+        disparoClip  = new AudioClip(Objects.requireNonNull(getClass().getResource("/sounds/disparo_short.mp3")).toExternalForm());
+        misilClip    = new AudioClip(Objects.requireNonNull(getClass().getResource("/sounds/misil_short.mp3")).toExternalForm());
+        fondoClip    = new AudioClip(Objects.requireNonNull(getClass().getResource("/sounds/fondo.mp3")).toExternalForm());
+        gameOverClip = new AudioClip(Objects.requireNonNull(getClass().getResource("/sounds/game_over.mp3")).toExternalForm());
+        victoryClip  = new AudioClip(Objects.requireNonNull(getClass().getResource("/sounds/victory.mp3")).toExternalForm());
 
         disparoClip.setVolume(0.6);
         misilClip.setVolume(0.6);

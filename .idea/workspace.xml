@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="386af3d4-68cc-470a-adb1-dd6bfe29b2b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/projectile/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/projectile/Projectile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/tower/Tower.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/model/tower/Tower.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/view/GameRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/view/GameRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/untitled/src/main/java/org/example/view/MenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/untitled/src/main/java/org/example/view/MenuView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

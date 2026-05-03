@@ -9,6 +9,8 @@ import org.example.model.game.Game;
 import org.example.model.projectile.Projectile;
 import org.example.model.tower.Tower;
 
+import java.util.Objects;
+
 public class GameRenderer {
 
     private final GraphicsContext gc;
@@ -48,25 +50,25 @@ public class GameRenderer {
     public GameRenderer(GraphicsContext gc) {
         this.gc = gc;
 
-        baseSprite = new Image(getClass().getResourceAsStream("/sprite_base/tower_round.png"));
+        baseSprite = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprite_base/tower_round.png")));
 
-        weakSprite = new Image(getClass().getResourceAsStream("/sprites/zombie_weak_sheet.png"));
-        fastSprite = new Image(getClass().getResourceAsStream("/sprites/zombie_fast_sheet.png"));
-        tankSprite = new Image(getClass().getResourceAsStream("/sprites/zombie_tank_sheet.png"));
+        weakSprite = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/zombie_weak_sheet.png")));
+        fastSprite = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/zombie_fast_sheet.png")));
+        tankSprite = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites/zombie_tank_sheet.png")));
 
-        towerSimple    = new Image(getClass().getResourceAsStream("/sprites_tower/tower_simple.png"));
-        towerFast      = new Image(getClass().getResourceAsStream("/sprites_tower/tower_fast.png"));
-        towerPowerful0 = new Image(getClass().getResourceAsStream("/sprites_tower/tower_powerful_0.png"));
-        towerPowerful1 = new Image(getClass().getResourceAsStream("/sprites_tower/tower_powerful_1.png"));
+        towerSimple    = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites_tower/tower_simple.png")));
+        towerFast      = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites_tower/tower_fast.png")));
+        towerPowerful0 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites_tower/tower_powerful_0.png")));
+        towerPowerful1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites_tower/tower_powerful_1.png")));
 
-        bulletFast     = new Image(getClass().getResourceAsStream("/sprites_tower/bullet_fast.png"));
-        bulletPowerful = new Image(getClass().getResourceAsStream("/sprites_tower/bullet_powerful.png"));
+        bulletFast     = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites_tower/bullet_fast.png")));
+        bulletPowerful = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/sprites_tower/bullet_powerful.png")));
 
-        grass = new Image(getClass().getResourceAsStream("/tiles/grass.png"));
-        path  = new Image(getClass().getResourceAsStream("/tiles/greypath.png"));
-        slot  = new Image(getClass().getResourceAsStream("/tiles/towerSlot.png"));
-        bush1 = new Image(getClass().getResourceAsStream("/tiles/bush1.png"));
-        bush2 = new Image(getClass().getResourceAsStream("/tiles/bush2.png"));
+        grass = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/grass.png")));
+        path  = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/greypath.png")));
+        slot  = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/towerSlot.png")));
+        bush1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/bush1.png")));
+        bush2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/tiles/bush2.png")));
     }
 
 
