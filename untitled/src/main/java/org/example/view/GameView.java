@@ -153,7 +153,6 @@ public class GameView {
                 // sonidos
                 if (game.wasShotFiredSimple())   sounds.playDisparo();
                 if (game.wasShotFiredPowerful()) sounds.playMisil();
-                if (game.wasEnemyReachedBase())  sounds.playEntradaBase();
 
                 moneyLabel.setText("$ " + game.getPlayer().getMoney());
                 scoreLabel.setText("Score: " + game.getPlayer().getScore());
