@@ -42,13 +42,17 @@ Las torretas disparan solas al enemigo más cercano dentro de su rango.
 Torretas disponibles:
 
 Simple ($50) — 1 de daño, 1 disparo por segundo
+
 Rápida ($75) — 1 de daño, 2 disparos por segundo
+
 Poderosa ($100) — 2 de daño, 1 disparo por segundo
 
 Enemigos:
 
 Débil — 1 de vida, lento, da $10
+
 Rápido — 2 de vida, rápido, da $20
+
 Tanque — 6 de vida, muy lento, da $30
 
 Si ganás un nivel, el dinero, puntaje, vida de la base y torretas pasan al siguiente. Si perdés, volvés al menú y empezás desde el nivel 1.
