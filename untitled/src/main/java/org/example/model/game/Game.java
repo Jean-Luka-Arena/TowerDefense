@@ -29,7 +29,6 @@ public class Game {
 
     private boolean shotFiredSimple = false;
     private boolean shotFiredPowerful = false;
-    private boolean enemyReachedBase = false;
 
     public Game(Route route, Level level, int initialMoney) {
         this.player = new Player(initialMoney);
@@ -49,7 +48,6 @@ public class Game {
 
         shotFiredSimple = false;
         shotFiredPowerful = false;
-        enemyReachedBase = false;
 
         elapsedTimeMs += deltaTime * 1000;
 
@@ -92,7 +90,6 @@ public class Game {
                 toRemove.add(enemy);
             } else if (enemy.hasReachedEnd(route)) {
                 base.takeDamage(enemy.getDamage());
-                enemyReachedBase = true;
                 toRemove.add(enemy);
             }
         }

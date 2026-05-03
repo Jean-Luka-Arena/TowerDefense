@@ -27,8 +27,7 @@ public class LevelLoader {
             Document doc = builder.parse(xmlStream);
             doc.getDocumentElement().normalize();
 
-            int initialMoney      = Integer.parseInt(getTextContent(doc, "initialMoney"));
-            double spawnInterval  = Double.parseDouble(getTextContent(doc, "spawnInterval"));
+            int initialMoney      = Integer.parseInt(getTextContent(doc));
 
             List<Point> routePoints = parsePoints(doc, "route", "point");
             List<Point> towerSlots  = parsePoints(doc, "towerSlots", "slot");
@@ -37,7 +36,7 @@ public class LevelLoader {
             List<ScheduledEnemy> scheduledEnemies = parseEnemies(doc);
             List<InitialTower> initialTowers = parseInitialTowers(doc);
 
-            Level level = new Level(scheduledEnemies, spawnInterval);
+            Level level = new Level(scheduledEnemies);
 
             return new LevelData(level, route, initialMoney, initialTowers);
 
@@ -96,7 +95,7 @@ public class LevelLoader {
         return list;
     }
 
-    private String getTextContent(Document doc, String tag) {
-        return doc.getElementsByTagName(tag).item(0).getTextContent().trim();
+    private String getTextContent(Document doc) {
+        return doc.getElementsByTagName("initialMoney").item(0).getTextContent().trim();
     }
 }

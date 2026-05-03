@@ -6,7 +6,7 @@ public class Projectile {
     private double y; /// posicion actual del proyectil en pantalla
     private final int damage; /// dano que va a aplicarle a enemigo cuando impacte
     private final double speed; /// velocidad a la que va (en pixeles por segundo)
-    private Enemy target; /// referencia al enemigo al que persigue, se va a ir actualizando a medida que este avance (persigue al enemigo basicamente)
+    private final Enemy target; /// referencia al enemigo al que persigue, se va a ir actualizando a medida que este avance (persigue al enemigo basicamente)
     private boolean active; /// estado del proyectil, se desactiva cuando impacta al enemigo o cuando el enemigo muere antes de que llegue.
     private final String towerType;
     private static final double SPEED = 200.0;
@@ -60,5 +60,4 @@ public class Projectile {
     }
 
     public String getTowerType() { return towerType; }
-    public Enemy getTarget() { return target; }
 }

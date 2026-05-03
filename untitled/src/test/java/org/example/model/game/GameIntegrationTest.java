@@ -47,7 +47,7 @@ public class GameIntegrationTest {
         route = new Route(routePoints, towerSlots);
 
         // Nivel vacío (sin enemies preagendados); los spawneamos manualmente en cada test
-        level = new Level(List.of(), 0.0);
+        level = new Level(List.of());
 
         game = new Game(route, level, 200);
     }

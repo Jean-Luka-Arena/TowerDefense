@@ -5,11 +5,11 @@ import java.util.List;
 
 public class Level {
     private final List<ScheduledEnemy> scheduledEnemies;
-    private final double spawnInterval;
 
-    public Level(List<ScheduledEnemy> scheduledEnemies, double spawnInterval) {
+
+    public Level(List<ScheduledEnemy> scheduledEnemies) {
         this.scheduledEnemies = scheduledEnemies;
-        this.spawnInterval = spawnInterval;
+
     }
 
     public List<ScheduledEnemy> getScheduledEnemies() {
@@ -18,9 +18,5 @@ public class Level {
 
     public int getTotalEnemies() {
         return scheduledEnemies.size();
-    }
-
-    public double getSpawnInterval() {
-        return spawnInterval;
     }
 }

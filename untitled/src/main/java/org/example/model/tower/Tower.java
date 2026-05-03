@@ -76,10 +76,7 @@ public abstract class Tower {
         this.y = y;
     }
 
-    public int getDamage() { return damage; }
     public int getPrice() { return price; }
-    public int getRange() { return range; }
-    public int getShotSpeed() { return shotSpeed; }
 
     public double getX() { return x; }
     public double getY() { return y; }

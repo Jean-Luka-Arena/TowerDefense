@@ -5,7 +5,6 @@ import org.example.model.point.Point;
 public abstract class Enemy {
 
     private int health;
-    private final int maxHealth; ///esto desp vemos, es x si queremos poner una barra de vida
     private final int damage; /// esto es para saber que danio nos hace si no lo matamos y llega a la base
     private final int reward; ///son las monedas que ganás al matar un enemigo
     private final int scoreValue; ///es el puntaje que podemos mostrar x pantalla que vamos acumulando, mepa que es opcional pero lo pongo x las dudas
@@ -20,7 +19,6 @@ public abstract class Enemy {
 
     protected Enemy(int health, int damage, int reward, int scoreValue, double speed) {
         this.health = health;
-        this.maxHealth = health;
         this.damage = damage;
         this.reward = reward;
         this.scoreValue = scoreValue;
@@ -88,12 +86,8 @@ public abstract class Enemy {
         this.y = y;
     }
 
-    public void advanceRouteIndex() {
-        this.routeIndex++;
-    }
 
     public int getHealth() { return health; }
-    public int getMaxHealth() { return maxHealth; }
     public int getDamage() { return damage; }
     public int getReward() { return reward; }
     public int getScoreValue() { return scoreValue; }
@@ -104,6 +98,6 @@ public abstract class Enemy {
     public double getDy() { return dy; }
     public double getAnimTime() { return animTime; }
 
-    public double getSpeed(){return speed;};
+    public double getSpeed(){return speed;}
     public abstract String getType();
 }
