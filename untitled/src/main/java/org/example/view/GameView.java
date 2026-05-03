@@ -1,4 +1,5 @@
 package org.example.view;
+import org.example.view.sound.SoundManager;
 
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Insets;
@@ -26,10 +27,12 @@ public class GameView {
     private int currentLevel;
     private final Stage stage;
     private String selectedTowerType = null;
+    private final SoundManager sounds;
 
-    public GameView(Stage stage, int levelNumber, int accumulatedScore, int accumulatedMoney,int baseHealth, List<Tower> previousTowers) {
+    public GameView(Stage stage, int levelNumber, int accumulatedScore, int accumulatedMoney, int baseHealth, List<Tower> previousTowers) {
         this.stage = stage;
         this.currentLevel = levelNumber;
+        this.sounds = new SoundManager();
 
         LevelLoader loader = new LevelLoader();
         TowerFactory towerFactory = new TowerFactory();
@@ -39,20 +42,17 @@ public class GameView {
         this.game = new Game(data.getRoute(), data.getLevel(), initialMoney);
         game.getBase().setHealth(baseHealth);
 
-        // score acumulado
         if (accumulatedScore > 0) {
             game.getPlayer().addScore(accumulatedScore);
         }
 
-        // torres del XML (si hay)
         for (InitialTower it : data.getInitialTowers()) {
             game.addTower(towerFactory.create(it.getType()), it.getSlot());
         }
 
-        //  NUEVO: torres persistentes
         if (previousTowers != null) {
             for (Tower t : previousTowers) {
-                game.addTower(towerFactory.create(t.getType()), new Point(t.getX(), t.getY()));
+                game.addTower(towerFactory.create(t.getType()), new Point((int)t.getX(), (int)t.getY()));
             }
         }
 
@@ -92,6 +92,8 @@ public class GameView {
 
         GameRenderer renderer = new GameRenderer(gc);
 
+        sounds.startMusic();
+
         canvas.setOnMouseClicked(e -> {
             if (selectedTowerType == null) {
                 warningLabel.setText("⚠ Seleccioná una torreta primero");
@@ -121,15 +123,11 @@ public class GameView {
                 } else {
                     try {
                         game.placeOrReplaceTower(tower, nearestSlot);
-
                         game.getPlayer().spend(cost);
                         warningLabel.setText("");
                         moneyLabel.setText("$ " + game.getPlayer().getMoney());
-
                         selectedTowerType = null;
-
                     } catch (IllegalArgumentException ex) {
-
                         if (ex.getMessage().equals("Misma torre")) {
                             warningLabel.setText("⚠ Ya hay misma torre");
                         } else {
@@ -151,6 +149,11 @@ public class GameView {
                 lastTime[0] = now;
 
                 game.update(deltaTime);
+
+                // sonidos
+                if (game.wasShotFiredSimple())   sounds.playDisparo();
+                if (game.wasShotFiredPowerful()) sounds.playMisil();
+                if (game.wasEnemyReachedBase())  sounds.playEntradaBase();
 
                 moneyLabel.setText("$ " + game.getPlayer().getMoney());
                 scoreLabel.setText("Score: " + game.getPlayer().getScore());
@@ -185,9 +188,9 @@ public class GameView {
         };
 
         for (String[] t : towers) {
-            String type = t[0];
+            String type    = t[0];
             String imgPath = t[1];
-            String label = t[2];
+            String label   = t[2];
 
             ImageView iv = new ImageView(new Image(getClass().getResourceAsStream(imgPath)));
             iv.setFitWidth(48);
@@ -215,9 +218,8 @@ public class GameView {
     }
 
     private void showVictory() {
-
+        sounds.stopMusic();
         if (currentLevel >= 3) {
-            // pantalla final
             VictoryView view = new VictoryView(stage);
             SceneTransition.fadeTo(stage, view.getScene());
             return;
@@ -231,11 +233,11 @@ public class GameView {
                 game.getBase().getHealth(),
                 new ArrayList<>(game.getTowers())
         );
-
         stage.setScene(next.getScene());
     }
 
     private void showDefeat() {
+        sounds.stopMusic();
         DefeatView view = new DefeatView(stage);
         SceneTransition.fadeTo(stage, view.getScene());
     }

@@ -3,6 +3,7 @@ package org.example.view;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import org.example.model.base.Base;
 import org.example.model.enemy.Enemy;
 import org.example.model.game.Game;
 import org.example.model.projectile.Projectile;
@@ -12,6 +13,7 @@ public class GameRenderer {
 
     private final GraphicsContext gc;
 
+    private final Image baseSprite;
     // sprites enemigos
     private final Image weakSprite;
     private final Image fastSprite;
@@ -38,12 +40,15 @@ public class GameRenderer {
     private static final int FRAME_ROWS = 4;
     private static final int TILE_SIZE = 64;
     private static final int TOWER_SIZE = 48;
+    private static final int BASE_SIZE = 48;
     private static final int BULLET_SIZE = 20;
 
     private double globalTime = 0;
 
     public GameRenderer(GraphicsContext gc) {
         this.gc = gc;
+
+        baseSprite = new Image(getClass().getResourceAsStream("/sprite_base/tower_round.png"));
 
         weakSprite = new Image(getClass().getResourceAsStream("/sprites/zombie_weak_sheet.png"));
         fastSprite = new Image(getClass().getResourceAsStream("/sprites/zombie_fast_sheet.png"));
@@ -64,6 +69,14 @@ public class GameRenderer {
         bush2 = new Image(getClass().getResourceAsStream("/tiles/bush2.png"));
     }
 
+
+    private void drawBase(Game game) {
+        Base base = game.getBase();
+        double x = base.getX() - BASE_SIZE / 2.0;
+        double y = base.getY() - BASE_SIZE;
+
+        gc.drawImage(baseSprite, x, y, TILE_SIZE, TILE_SIZE);
+    }
     // ========================= ENEMIGOS =========================
 
     private void drawEnemy(Enemy enemy) {
@@ -221,13 +234,14 @@ public class GameRenderer {
     public void render(Game game, double deltaTime) {
         globalTime += deltaTime;
 
+
+
         drawGrass();
         drawPath(game);
         drawSlots(game);
         drawDecor();
 
-        gc.setFill(Color.BLUE);
-        gc.fillRect(game.getBase().getX() - 20, game.getBase().getY() - 20, 40, 40);
+        drawBase(game);
 
         for (Tower t : game.getTowers()) {
             drawTower(t);

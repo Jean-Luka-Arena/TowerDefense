@@ -27,6 +27,10 @@ public class Game {
     private double elapsedTimeMs = 0;
     private int nextEnemyIndex = 0;
 
+    private boolean shotFiredSimple = false;
+    private boolean shotFiredPowerful = false;
+    private boolean enemyReachedBase = false;
+
     public Game(Route route, Level level, int initialMoney) {
         this.player = new Player(initialMoney);
         this.enemies = new ArrayList<>();
@@ -43,9 +47,12 @@ public class Game {
     public void update(double deltaTime) {
         if (isGameOver()) return;
 
+        shotFiredSimple = false;
+        shotFiredPowerful = false;
+        enemyReachedBase = false;
+
         elapsedTimeMs += deltaTime * 1000;
 
-        // spawn enemigos según su delay
         List<ScheduledEnemy> scheduled = level.getScheduledEnemies();
         while (nextEnemyIndex < scheduled.size()) {
             ScheduledEnemy next = scheduled.get(nextEnemyIndex);
@@ -60,12 +67,19 @@ public class Game {
         for (Enemy enemy : enemies) {
             enemy.update(route, deltaTime);
         }
+
         for (Tower tower : towers) {
             Projectile p = tower.update(enemies);
             if (p != null) {
                 projectiles.add(p);
+                if (tower.getType().equals("powerful")) {
+                    shotFiredPowerful = true;
+                } else {
+                    shotFiredSimple = true;
+                }
             }
         }
+
         for (Projectile p : projectiles) {
             p.update(deltaTime);
         }
@@ -78,6 +92,7 @@ public class Game {
                 toRemove.add(enemy);
             } else if (enemy.hasReachedEnd(route)) {
                 base.takeDamage(enemy.getDamage());
+                enemyReachedBase = true;
                 toRemove.add(enemy);
             }
         }
@@ -102,10 +117,8 @@ public class Game {
     }
 
     public void placeOrReplaceTower(Tower newTower, Point point) {
-
         for (int i = 0; i < towers.size(); i++) {
             Tower existing = towers.get(i);
-
             if ((int)existing.getX() == point.getX() &&
                     (int)existing.getY() == point.getY()) {
                 if (existing.getType().equals(newTower.getType())) {
@@ -117,7 +130,6 @@ public class Game {
             }
         }
 
-        // si no había torre → colocar normal
         if (!route.getTowerSpots().contains(point)) {
             throw new IllegalArgumentException("Slot inválido");
         }
@@ -135,13 +147,12 @@ public class Game {
         throw new IllegalArgumentException("Casillero no disponible");
     }
 
-    public boolean isGameOver() {
-        return base.isDestroyed();
-    }
+    public boolean isGameOver() { return base.isDestroyed(); }
+    public boolean isWin() { return enemies.isEmpty() && nextEnemyIndex >= level.getTotalEnemies(); }
 
-    public boolean isWin() {
-        return enemies.isEmpty() && nextEnemyIndex >= level.getTotalEnemies();
-    }
+    public boolean wasShotFiredSimple()   { return shotFiredSimple; }
+    public boolean wasShotFiredPowerful() { return shotFiredPowerful; }
+    public boolean wasEnemyReachedBase()  { return enemyReachedBase; }
 
     public List<Projectile> getProjectiles() { return projectiles; }
     public Route getRoute() { return route; }
