@@ -84,7 +84,6 @@ public abstract class Tower {
     public double getX() { return x; }
     public double getY() { return y; }
     public abstract String getType();
-    public long getTimeLastShot() { return timeLastShot; }
     public Enemy getCurrentTarget() { return currentTarget; }
 
 }

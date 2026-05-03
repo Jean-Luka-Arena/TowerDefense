@@ -127,7 +127,6 @@ public class GameRenderer {
 
         switch (tower.getType()) {
             case "simple" -> {
-                // agente apunta hacia la derecha por defecto → offset 0
                 gc.save();
                 gc.translate(cx, cy);
                 gc.rotate(angle);
@@ -135,7 +134,6 @@ public class GameRenderer {
                 gc.restore();
             }
             case "fast" -> {
-                // torreta Kenney apunta hacia arriba por defecto → offset -90
                 gc.save();
                 gc.translate(cx, cy);
                 gc.rotate(angle+90);
@@ -143,7 +141,6 @@ public class GameRenderer {
                 gc.restore();
             }
             case "powerful" -> {
-                // torreta Kenney apunta hacia arriba → offset -90
                 Image frame;
                 if (tower.getCurrentTarget() != null && tower.getCurrentTarget().isAlive()) {
                     frame = (int)(globalTime * 2) % 2 == 0 ? towerPowerful0 : towerPowerful1;
@@ -168,7 +165,6 @@ public class GameRenderer {
             default         -> bulletFast;
         };
 
-        // misil más grande
         int size = p.getTowerType().equals("powerful") ? 64 : BULLET_SIZE;
 
         double dx = p.getDx();
@@ -233,9 +229,6 @@ public class GameRenderer {
 
     public void render(Game game, double deltaTime) {
         globalTime += deltaTime;
-
-
-
         drawGrass();
         drawPath(game);
         drawSlots(game);

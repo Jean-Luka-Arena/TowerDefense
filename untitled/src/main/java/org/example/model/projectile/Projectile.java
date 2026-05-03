@@ -60,6 +60,5 @@ public class Projectile {
     }
 
     public String getTowerType() { return towerType; }
-
     public Enemy getTarget() { return target; }
 }

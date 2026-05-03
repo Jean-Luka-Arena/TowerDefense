@@ -152,7 +152,6 @@ public class Game {
 
     public boolean wasShotFiredSimple()   { return shotFiredSimple; }
     public boolean wasShotFiredPowerful() { return shotFiredPowerful; }
-    public boolean wasEnemyReachedBase()  { return enemyReachedBase; }
 
     public List<Projectile> getProjectiles() { return projectiles; }
     public Route getRoute() { return route; }

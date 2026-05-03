@@ -14,8 +14,6 @@ public class MenuView {
     private final Scene scene;
 
     public MenuView(Stage stage) {
-
-        // 🎮 título
         Text title = new Text("TOWER DEFENSE");
         title.setStyle("""
                 -fx-font-size: 42px;
@@ -28,11 +26,9 @@ public class MenuView {
         glow.setRadius(20);
         title.setEffect(glow);
 
-        // 🔘 botones
         Button startBtn = createButton("INICIAR JUEGO");
         Button exitBtn  = createButton("SALIR");
 
-        // acciones (SIN fade)
         startBtn.setOnAction(e -> {
             GameView gameView = new GameView(stage, 1, 0, 0, 10,null);
             stage.setScene(gameView.getScene());
@@ -40,7 +36,6 @@ public class MenuView {
 
         exitBtn.setOnAction(e -> stage.close());
 
-        // layout
         VBox root = new VBox(30, title, startBtn, exitBtn);
         root.setAlignment(Pos.CENTER);
         root.setStyle("-fx-background-color: #1e1e1e;");
