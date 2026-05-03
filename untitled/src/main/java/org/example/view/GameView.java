@@ -1,7 +1,7 @@
 package org.example.view;
-import org.example.view.sound.SoundManager;
 
 import javafx.animation.AnimationTimer;
+import javafx.animation.PauseTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,10 +12,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.example.model.game.Game;
 import org.example.model.level.*;
 import org.example.model.point.Point;
 import org.example.model.tower.*;
+import org.example.view.sound.SoundManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +93,6 @@ public class GameView {
         this.scene = new Scene(root, 800, 600);
 
         GameRenderer renderer = new GameRenderer(gc);
-
         sounds.startMusic();
 
         canvas.setOnMouseClicked(e -> {
@@ -150,7 +151,6 @@ public class GameView {
 
                 game.update(deltaTime);
 
-                // sonidos
                 if (game.wasShotFiredSimple())   sounds.playDisparo();
                 if (game.wasShotFiredPowerful()) sounds.playMisil();
 
@@ -162,10 +162,14 @@ public class GameView {
 
                 if (game.isGameOver()) {
                     stop();
-                    showDefeat();
+                    PauseTransition pause = new PauseTransition(Duration.millis(100));
+                    pause.setOnFinished(ev -> showDefeat());
+                    pause.play();
                 } else if (game.isWin()) {
                     stop();
-                    showVictory();
+                    PauseTransition pause = new PauseTransition(Duration.millis(100));
+                    pause.setOnFinished(ev -> showVictory());
+                    pause.play();
                 }
             }
         };
@@ -218,25 +222,21 @@ public class GameView {
 
     private void showVictory() {
         sounds.stopMusic();
-        if (currentLevel >= 3) {
-            VictoryView view = new VictoryView(stage);
-            SceneTransition.fadeTo(stage, view.getScene());
-            return;
-        }
-
-        GameView next = new GameView(
+        sounds.playVictory();
+        VictoryView view = new VictoryView(
                 stage,
-                currentLevel + 1,
+                currentLevel,
                 game.getPlayer().getScore(),
                 game.getPlayer().getMoney(),
                 game.getBase().getHealth(),
                 new ArrayList<>(game.getTowers())
         );
-        stage.setScene(next.getScene());
+        SceneTransition.fadeTo(stage, view.getScene());
     }
 
     private void showDefeat() {
         sounds.stopMusic();
+        sounds.playGameOver();
         DefeatView view = new DefeatView(stage);
         SceneTransition.fadeTo(stage, view.getScene());
     }
