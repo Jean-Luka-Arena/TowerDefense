@@ -63,3 +63,17 @@ Los niveles están en `src/main/resources/nivelN.xml` y se validan con un XSD al
 Cada archivo define el dinero inicial, la ruta que siguen los enemigos (una lista de puntos donde el primero es el spawn y el último es la base), los slots disponibles para torretas, torretas preinstaladas si las hay, y la lista de enemigos con su tipo y el delay en milisegundos desde el inicio del nivel.
 
 Los tipos de enemigos válidos son `WEAK`, `FAST` y `TANK`.
+
+## links videos
+
+https://youtu.be/vPXINI7Xvok?si=mdL1XQWhAbvfT--h
+
+https://youtu.be/liWerDg73sc?si=bC2eauzbZyX9sh8D
+
+## derechos de autor de sprites
+
+Copyright/Attribution Notice: 
+Riley Gombart
+
+Copyright/Attribution Notice: 
+Credit "Kenney.nl" or "www.kenney.nl", this is not mandatory.
