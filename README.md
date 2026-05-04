@@ -10,7 +10,7 @@
 
 ## Docente y Corrector
 - Diego Essaya
-- 
+- Leonel Rolon
 
 ## Integrantes
 - Jean Luka Arena
