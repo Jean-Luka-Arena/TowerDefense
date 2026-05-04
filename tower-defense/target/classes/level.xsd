@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="level">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="initialMoney"   type="xs:positiveInteger"/>
+                <xs:element name="spawnInterval"  type="xs:decimal"/>
+                <xs:element name="route"          type="RouteType"/>
+                <xs:element name="towerSlots"     type="TowerSlotsType"/>
+                <xs:element name="initialTowers"  type="InitialTowersType" minOccurs="0"/>
+                <xs:element name="enemies"        type="EnemiesType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="RouteType">
+        <xs:sequence>
+            <xs:element name="point" type="PointType" minOccurs="2" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TowerSlotsType">
+        <xs:sequence>
+            <xs:element name="slot" type="PointType" minOccurs="2" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="InitialTowersType">
+        <xs:sequence>
+            <xs:element name="tower" type="InitialTowerType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="InitialTowerType">
+        <xs:attribute name="type"  type="TowerTypeEnum" use="required"/>
+        <xs:attribute name="slotX" type="xs:integer"    use="required"/>
+        <xs:attribute name="slotY" type="xs:integer"    use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="EnemiesType">
+        <xs:sequence>
+            <xs:element name="spawn" type="SpawnType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SpawnType">
+        <xs:attribute name="type"  type="EnemyTypeEnum" use="required"/>
+        <xs:attribute name="delay" type="xs:nonNegativeInteger" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="PointType">
+        <xs:attribute name="x" type="xs:integer" use="required"/>
+        <xs:attribute name="y" type="xs:integer" use="required"/>
+    </xs:complexType>
+
+    <xs:simpleType name="EnemyTypeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="WEAK"/>
+            <xs:enumeration value="FAST"/>
+            <xs:enumeration value="TANK"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="TowerTypeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="simple"/>
+            <xs:enumeration value="fast"/>
+            <xs:enumeration value="powerful"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

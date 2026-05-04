@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level>
+    <initialMoney>100</initialMoney>
+    <spawnInterval>2.0</spawnInterval>
+    <route>
+        <point x="0" y="256"/>
+        <point x="64" y="256"/>
+        <point x="128" y="256"/>
+        <point x="192" y="256"/>
+        <point x="192" y="192"/>
+        <point x="192" y="128"/>
+        <point x="256" y="128"/>
+        <point x="320" y="128"/>
+        <point x="384" y="128"/>
+        <point x="384" y="192"/>
+        <point x="384" y="256"/>
+        <point x="384" y="320"/>
+        <point x="384" y="384"/>
+        <point x="384" y="448"/>
+        <point x="448" y="448"/>
+        <point x="512" y="448"/>
+        <point x="576" y="448"/>
+        <point x="576" y="384"/>
+        <point x="576" y="320"/>
+        <point x="576" y="256"/>
+        <point x="576" y="192"/>
+        <point x="576" y="128"/>
+        <point x="640" y="128"/>
+
+
+    </route>
+    <towerSlots>
+        <slot x="128" y="128"/>
+        <slot x="320" y="448"/>
+        <slot x="448" y="256"/>
+        <slot x="640" y="384"/>
+        <slot x="576" y="64"/>
+
+    </towerSlots>
+    <initialTowers/>
+    <enemies>
+        <spawn type="FAST" delay="0"/>
+        <spawn type="TANK" delay="2000"/>
+        <spawn type="FAST" delay="4000"/>
+        <spawn type="TANK" delay="6000"/>
+        <spawn type="TANK" delay="8000"/>
+        <spawn type="FAST" delay="10000"/>
+        <spawn type="TANK" delay="12000"/>
+    </enemies>
+</level>
