@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.example.controller.GameController;
 
 public class MenuView {
 
@@ -30,8 +31,8 @@ public class MenuView {
         Button exitBtn  = createButton("SALIR");
 
         startBtn.setOnAction(e -> {
-            GameView gameView = new GameView(stage, 1, 0, 0, 10,null);
-            stage.setScene(gameView.getScene());
+            GameController controller = new GameController(stage, 1, 0, 0, 10, null);
+            stage.setScene(controller.getScene());
         });
 
         exitBtn.setOnAction(e -> stage.close());
@@ -57,7 +58,6 @@ public class MenuView {
             -fx-background-radius: 10;
         """);
 
-        // hover efecto
         btn.setOnMouseEntered(e ->
                 btn.setStyle("""
                     -fx-background-color: #27ae60;

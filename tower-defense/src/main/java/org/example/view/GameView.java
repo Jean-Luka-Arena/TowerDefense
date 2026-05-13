@@ -1,7 +1,5 @@
 package org.example.view;
 
-import javafx.animation.AnimationTimer;
-import javafx.animation.PauseTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,61 +8,43 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import org.example.model.game.Game;
-import org.example.model.level.*;
-import org.example.model.point.Point;
-import org.example.model.tower.*;
-import org.example.view.sound.SoundManager;
+import org.example.model.tower.TowerFactory;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 public class GameView {
 
     private final Scene scene;
-    private Game game;
-    private int currentLevel;
+    private final Game game;
+    private final int currentLevel;
     private final Stage stage;
-    private String selectedTowerType = null;
+    private final Label moneyLabel;
+    private final Label scoreLabel;
+    private final Label hpLabel;
+    private final Label warningLabel;
+    private final Canvas canvas;
+    private final GameRenderer renderer;
 
+    private Consumer<String> onTowerSelected = type -> {};
 
-    public GameView(Stage stage, int levelNumber, int accumulatedScore, int accumulatedMoney, int baseHealth, List<Tower> previousTowers) {
+    public GameView(Stage stage, int levelNumber, Game game, TowerFactory towerFactory) {
         this.stage = stage;
         this.currentLevel = levelNumber;
+        this.game = game;
 
-
-        LevelLoader loader = new LevelLoader();
-        TowerFactory towerFactory = new TowerFactory();
-        LevelData data = loader.load("/nivel" + levelNumber + ".xml");
-
-        int initialMoney = accumulatedMoney > 0 ? accumulatedMoney : data.getInitialMoney();
-        this.game = new Game(data.getRoute(), data.getLevel(), initialMoney);
-        game.getBase().setHealth(baseHealth);
-
-        if (accumulatedScore > 0) {
-            game.getPlayer().addScore(accumulatedScore);
-        }
-
-        for (InitialTower it : data.getInitialTowers()) {
-            game.addTower(towerFactory.create(it.getType()), it.getSlot());
-        }
-
-        if (previousTowers != null) {
-            for (Tower t : previousTowers) {
-                game.addTower(towerFactory.create(t.getType()), new Point((int)t.getX(), (int)t.getY()));
-            }
-        }
-
-        Canvas canvas = new Canvas(670, 520);
+        this.canvas = new Canvas(670, 520);
         GraphicsContext gc = canvas.getGraphicsContext2D();
+        this.renderer = new GameRenderer(gc);
 
-        Label moneyLabel = new Label("$ " + game.getPlayer().getMoney());
-        Label scoreLabel = new Label("Score: " + game.getPlayer().getScore());
-        Label hpLabel    = new Label("❤ " + game.getBase().getHealth());
+        this.moneyLabel = new Label("$ " + game.getPlayer().getMoney());
+        this.scoreLabel = new Label("Score: " + game.getPlayer().getScore());
+        this.hpLabel    = new Label("❤ " + game.getBase().getHealth());
 
         moneyLabel.setStyle("-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
         scoreLabel.setStyle("-fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;");
@@ -75,12 +55,12 @@ public class GameView {
         hud.setStyle("-fx-background-color: #222222;");
         hud.setAlignment(Pos.CENTER_LEFT);
 
-        Label warningLabel = new Label("");
+        this.warningLabel = new Label("");
         warningLabel.setStyle("-fx-text-fill: red; -fx-font-size: 11px;");
         warningLabel.setWrapText(true);
         warningLabel.setMaxWidth(120);
 
-        VBox towerBar = buildTowerBar(towerFactory, warningLabel);
+        VBox towerBar = buildTowerBar(towerFactory);
         towerBar.setStyle("-fx-background-color: #333333;");
         towerBar.setPadding(new Insets(12, 8, 12, 8));
         towerBar.setAlignment(Pos.TOP_CENTER);
@@ -92,91 +72,45 @@ public class GameView {
         root.setRight(towerBar);
         root.setStyle("-fx-background-color: #222222;");
         this.scene = new Scene(root, 800, 600);
-
-        GameRenderer renderer = new GameRenderer(gc);
-        SoundManager sounds = new SoundManager();
-        game.addListener(sounds);
-        sounds.startMusic();
-
-        canvas.setOnMouseClicked(e -> {
-            if (selectedTowerType == null) {
-                warningLabel.setText("⚠ Seleccioná una torreta primero");
-                return;
-            }
-
-            double clickX = e.getX();
-            double clickY = e.getY();
-
-            Point nearestSlot = null;
-            double minDist = Double.MAX_VALUE;
-
-            for (Point slot : game.getRoute().getTowerSpots()) {
-                double dist = Math.hypot(slot.getX() - clickX, slot.getY() - clickY);
-                if (dist < minDist) {
-                    minDist = dist;
-                    nearestSlot = slot;
-                }
-            }
-
-            if (nearestSlot != null && minDist <= 32) {
-                Tower tower = towerFactory.create(selectedTowerType);
-                int cost = tower.getPrice();
-
-                if (game.getPlayer().getMoney() < cost) {
-                    warningLabel.setText("⚠ Sin dinero ($" + cost + ")");
-                } else {
-                    try {
-                        game.placeOrReplaceTower(tower, nearestSlot);
-                        game.getPlayer().spend(cost);
-                        warningLabel.setText("");
-                        moneyLabel.setText("$ " + game.getPlayer().getMoney());
-                        selectedTowerType = null;
-                    } catch (IllegalArgumentException ex) {
-                        if (ex.getMessage().equals("Misma torre")) {
-                            warningLabel.setText("⚠ Ya hay misma torre");
-                        } else {
-                            warningLabel.setText("⚠ Slot inválido");
-                        }
-                    }
-                }
-            } else {
-                warningLabel.setText("⚠ Sin slot acá");
-            }
-        });
-
-        long[] lastTime = {System.nanoTime()};
-
-        AnimationTimer timer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                double deltaTime = (now - lastTime[0]) / 1_000_000_000.0;
-                lastTime[0] = now;
-
-                game.update(deltaTime);
-
-                moneyLabel.setText("$ " + game.getPlayer().getMoney());
-                scoreLabel.setText("Score: " + game.getPlayer().getScore());
-                hpLabel.setText("❤ " + game.getBase().getHealth());
-
-                renderer.render(game, deltaTime);
-
-                if (game.isGameOver()) {
-                    stop();
-                    PauseTransition pause = new PauseTransition(Duration.millis(100));
-                    pause.setOnFinished(ev -> showDefeat());
-                    pause.play();
-                } else if (game.isWin()) {
-                    stop();
-                    PauseTransition pause = new PauseTransition(Duration.millis(100));
-                    pause.setOnFinished(ev -> showVictory());
-                    pause.play();
-                }
-            }
-        };
-        timer.start();
     }
 
-    private VBox buildTowerBar(TowerFactory towerFactory, Label warningLabel) {
+    public void render(double deltaTime) {
+        renderer.render(game, deltaTime);
+    }
+
+    public void updateHUD() {
+        moneyLabel.setText("$ " + game.getPlayer().getMoney());
+        scoreLabel.setText("Score: " + game.getPlayer().getScore());
+        hpLabel.setText("❤ " + game.getBase().getHealth());
+    }
+
+    public void showVictory() {
+        SceneTransition.fadeTo(stage, new VictoryView(
+                stage, currentLevel,
+                game.getPlayer().getScore(),
+                game.getPlayer().getMoney(),
+                game.getBase().getHealth(),
+                new ArrayList<>(game.getTowers())
+        ).getScene());
+    }
+
+    public void showDefeat() {
+        SceneTransition.fadeTo(stage, new DefeatView(stage).getScene());
+    }
+
+    public void setOnCanvasClick(Consumer<MouseEvent> handler) {
+        canvas.setOnMouseClicked(handler::accept);
+    }
+
+    public void setOnTowerSelected(Consumer<String> handler) {
+        this.onTowerSelected = handler;
+    }
+
+    public void showWarning(String msg) { warningLabel.setText(msg); }
+    public void clearWarning()          { warningLabel.setText(""); }
+    public void refreshMoney()          { moneyLabel.setText("$ " + game.getPlayer().getMoney()); }
+
+    private VBox buildTowerBar(TowerFactory towerFactory) {
         VBox bar = new VBox(12);
         bar.setAlignment(Pos.TOP_CENTER);
 
@@ -208,33 +142,13 @@ public class GameView {
             btn.setAlignment(Pos.CENTER);
             btn.setPadding(new Insets(6));
 
-            btn.setOnMouseClicked(e -> {
-                selectedTowerType = type;
-                warningLabel.setText("");
-            });
+            btn.setOnMouseClicked(e -> { clearWarning(); onTowerSelected.accept(type); });
 
             bar.getChildren().add(btn);
         }
 
         bar.getChildren().add(warningLabel);
         return bar;
-    }
-
-    private void showVictory() {
-        VictoryView view = new VictoryView(
-                stage,
-                currentLevel,
-                game.getPlayer().getScore(),
-                game.getPlayer().getMoney(),
-                game.getBase().getHealth(),
-                new ArrayList<>(game.getTowers())
-        );
-        SceneTransition.fadeTo(stage, view.getScene());
-    }
-
-    private void showDefeat() {
-        DefeatView view = new DefeatView(stage);
-        SceneTransition.fadeTo(stage, view.getScene());
     }
 
     public Scene getScene() { return scene; }

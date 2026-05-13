@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.example.controller.GameController;
 import org.example.model.tower.Tower;
 
 import java.util.List;
@@ -34,8 +35,8 @@ public class VictoryView {
         if (currentLevel < 3) {
             Button nextBtn = new Button("Siguiente nivel");
             nextBtn.setOnAction(e -> {
-                GameView next = new GameView(stage, currentLevel + 1, score, money, baseHealth, towers);
-                SceneTransition.fadeTo(stage, next.getScene());
+                GameController controller = new GameController(stage, currentLevel + 1, score, money, baseHealth, towers);
+                SceneTransition.fadeTo(stage, controller.getScene());
             });
             root.getChildren().add(nextBtn);
         }
