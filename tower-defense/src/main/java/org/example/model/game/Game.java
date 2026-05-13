@@ -27,8 +27,10 @@ public class Game {
     private double elapsedTimeMs = 0;
     private int nextEnemyIndex = 0;
 
-    private boolean shotFiredSimple = false;
-    private boolean shotFiredPowerful = false;
+    private final List<GameEventListener> listeners = new ArrayList<>();
+    private boolean levelCompleteNotified = false;
+    private boolean defeatNotified = false;
+
 
     public Game(Route route, Level level, int initialMoney) {
         this.player = new Player(initialMoney);
@@ -43,11 +45,12 @@ public class Game {
         this.base = new Base(basePoint.getX(), basePoint.getY());
     }
 
+    public void addListener(GameEventListener listener) {
+        listeners.add(listener);
+    }
+
     public void update(double deltaTime) {
         if (isGameOver()) return;
-
-        shotFiredSimple = false;
-        shotFiredPowerful = false;
 
         elapsedTimeMs += deltaTime * 1000;
 
@@ -71,9 +74,9 @@ public class Game {
             if (p != null) {
                 projectiles.add(p);
                 if (tower.getType().equals("powerful")) {
-                    shotFiredPowerful = true;
+                    listeners.forEach(GameEventListener::onShotFiredPowerful);
                 } else {
-                    shotFiredSimple = true;
+                    listeners.forEach(GameEventListener::onShotFiredSimple);
                 }
             }
         }
@@ -95,6 +98,14 @@ public class Game {
         }
         enemies.removeAll(toRemove);
         projectiles.removeIf(p -> !p.isActive());
+
+        if (isGameOver() && !defeatNotified) {
+            defeatNotified = true;
+            listeners.forEach(GameEventListener::onDefeat);
+        } else if (isWin() && !levelCompleteNotified) {
+            levelCompleteNotified = true;
+            listeners.forEach(GameEventListener::onVictory);
+        }
     }
 
     public void spawnEnemy(Enemy enemy) {
@@ -146,9 +157,6 @@ public class Game {
 
     public boolean isGameOver() { return base.isDestroyed(); }
     public boolean isWin() { return enemies.isEmpty() && nextEnemyIndex >= level.getTotalEnemies(); }
-
-    public boolean wasShotFiredSimple()   { return shotFiredSimple; }
-    public boolean wasShotFiredPowerful() { return shotFiredPowerful; }
 
     public List<Projectile> getProjectiles() { return projectiles; }
     public Route getRoute() { return route; }

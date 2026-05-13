@@ -30,12 +30,12 @@ public class GameView {
     private int currentLevel;
     private final Stage stage;
     private String selectedTowerType = null;
-    private final SoundManager sounds;
+
 
     public GameView(Stage stage, int levelNumber, int accumulatedScore, int accumulatedMoney, int baseHealth, List<Tower> previousTowers) {
         this.stage = stage;
         this.currentLevel = levelNumber;
-        this.sounds = new SoundManager();
+
 
         LevelLoader loader = new LevelLoader();
         TowerFactory towerFactory = new TowerFactory();
@@ -94,6 +94,8 @@ public class GameView {
         this.scene = new Scene(root, 800, 600);
 
         GameRenderer renderer = new GameRenderer(gc);
+        SoundManager sounds = new SoundManager();
+        game.addListener(sounds);
         sounds.startMusic();
 
         canvas.setOnMouseClicked(e -> {
@@ -151,9 +153,6 @@ public class GameView {
                 lastTime[0] = now;
 
                 game.update(deltaTime);
-
-                if (game.wasShotFiredSimple())   sounds.playDisparo();
-                if (game.wasShotFiredPowerful()) sounds.playMisil();
 
                 moneyLabel.setText("$ " + game.getPlayer().getMoney());
                 scoreLabel.setText("Score: " + game.getPlayer().getScore());
@@ -222,8 +221,6 @@ public class GameView {
     }
 
     private void showVictory() {
-        sounds.stopMusic();
-        sounds.playVictory();
         VictoryView view = new VictoryView(
                 stage,
                 currentLevel,
@@ -236,8 +233,6 @@ public class GameView {
     }
 
     private void showDefeat() {
-        sounds.stopMusic();
-        sounds.playGameOver();
         DefeatView view = new DefeatView(stage);
         SceneTransition.fadeTo(stage, view.getScene());
     }

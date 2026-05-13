@@ -1,4 +1,4 @@
-package org.example;
+package org.example.model.TestAll;
 
 import org.example.model.game.Game;
 import org.example.model.level.InitialTower;
@@ -7,7 +7,7 @@ import org.example.model.level.LevelLoader;
 import org.example.model.tower.Tower;
 import org.example.model.tower.TowerFactory;
 
-public class Main {
+public class testAll {
 
     public static void main(String[] args) throws InterruptedException {
 

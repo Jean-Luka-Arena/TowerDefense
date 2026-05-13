@@ -1,36 +1,72 @@
 package org.example.view.sound;
 
-import javafx.scene.media.AudioClip;
+import org.example.model.game.GameEventListener;
+import javax.sound.sampled.*;
+import java.io.IOException;
+import java.net.URL;
 
-import java.util.Objects;
+public class SoundManager implements GameEventListener {
 
-public class SoundManager {
+    private final URL disparoUrl;
+    private final URL misilUrl;
+    private final URL fondoUrl;
+    private final URL gameOverUrl;
+    private final URL victoryUrl;
 
-    private final AudioClip disparoClip;
-    private final AudioClip misilClip;
-    private final AudioClip fondoClip;
-    private final AudioClip gameOverClip;
-    private final AudioClip victoryClip;
+    private Clip fondoClip;
 
     public SoundManager() {
-        disparoClip  = new AudioClip(Objects.requireNonNull(getClass().getResource("/sounds/disparo_short.mp3")).toExternalForm());
-        misilClip    = new AudioClip(Objects.requireNonNull(getClass().getResource("/sounds/misil_short.mp3")).toExternalForm());
-        fondoClip    = new AudioClip(Objects.requireNonNull(getClass().getResource("/sounds/fondo.mp3")).toExternalForm());
-        gameOverClip = new AudioClip(Objects.requireNonNull(getClass().getResource("/sounds/game_over.mp3")).toExternalForm());
-        victoryClip  = new AudioClip(Objects.requireNonNull(getClass().getResource("/sounds/victory.mp3")).toExternalForm());
-
-        disparoClip.setVolume(0.6);
-        misilClip.setVolume(0.6);
-        fondoClip.setVolume(0.15);
-        fondoClip.setCycleCount(AudioClip.INDEFINITE);
-        gameOverClip.setVolume(0.7);
-        victoryClip.setVolume(0.7);
+        disparoUrl  = getClass().getResource("/sounds/disparo_short.wav");
+        misilUrl    = getClass().getResource("/sounds/misil_short.wav");
+        fondoUrl    = getClass().getResource("/sounds/fondo.wav");
+        gameOverUrl = getClass().getResource("/sounds/game_over.wav");
+        victoryUrl  = getClass().getResource("/sounds/victory.wav");
     }
 
-    public void playDisparo()  { disparoClip.play(); }
-    public void playMisil()    { misilClip.play(); }
-    public void startMusic()   { fondoClip.play(); }
-    public void stopMusic()    { fondoClip.stop(); }
-    public void playGameOver() { gameOverClip.play(); }
-    public void playVictory()  { victoryClip.play(); }
+    private void playOnce(URL url) {
+        if (url == null) return;
+        try {
+            AudioInputStream ais = AudioSystem.getAudioInputStream(url);
+            Clip clip = AudioSystem.getClip();
+            clip.open(ais);
+            clip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            System.err.println("Error reproduciendo sonido: " + e.getMessage());
+        }
+    }
+
+    public void startMusic() {
+        if (fondoUrl == null) return;
+        try {
+            AudioInputStream ais = AudioSystem.getAudioInputStream(fondoUrl);
+            fondoClip = AudioSystem.getClip();
+            fondoClip.open(ais);
+            FloatControl volume = (FloatControl) fondoClip.getControl(FloatControl.Type.MASTER_GAIN);
+            volume.setValue(-15.0f);
+            fondoClip.loop(Clip.LOOP_CONTINUOUSLY);
+            fondoClip.start();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            System.err.println("Error con música de fondo: " + e.getMessage());
+        }
+    }
+
+
+    public void stopMusic() {
+        if (fondoClip != null && fondoClip.isRunning()) {
+            fondoClip.stop();
+            fondoClip.close();
+        }
+    }
+
+    @Override
+    public void onShotFiredSimple()   { playOnce(disparoUrl); }
+
+    @Override
+    public void onShotFiredPowerful() { playOnce(misilUrl); }
+
+    @Override
+    public void onVictory()  { stopMusic(); playOnce(victoryUrl); }
+
+    @Override
+    public void onDefeat()   { stopMusic(); playOnce(gameOverUrl); }
 }
