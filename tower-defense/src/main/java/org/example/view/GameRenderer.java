@@ -79,7 +79,6 @@ public class GameRenderer {
 
         gc.drawImage(baseSprite, x, y, TILE_SIZE, TILE_SIZE);
     }
-    // ========================= ENEMIGOS =========================
 
     private void drawEnemy(Enemy enemy) {
         Image sheet = switch (enemy.getType()) {
@@ -113,7 +112,6 @@ public class GameRenderer {
         gc.drawImage(sheet, srcX, srcY, frameW, frameH, destX, destY, frameW, frameH);
     }
 
-    // ========================= TORRETAS =========================
     private void drawTower(Tower tower) {
         double cx = tower.getX();
         double cy = tower.getY();
@@ -159,8 +157,6 @@ public class GameRenderer {
     }
 
 
-    // ========================= PROYECTILES =========================
-
     private void drawProjectile(Projectile p) {
         Image bullet = switch (p.getTowerType()) {
             case "powerful" -> bulletPowerful;
@@ -180,7 +176,6 @@ public class GameRenderer {
         gc.restore();
     }
 
-    // ========================= MAPA =========================
 
     private void drawGrass() {
         for (int x = 0; x < 800; x += TILE_SIZE) {
@@ -226,8 +221,6 @@ public class GameRenderer {
         gc.drawImage(bush1, 150, 400, TILE_SIZE, TILE_SIZE);
         gc.drawImage(bush1, 700, 256, TILE_SIZE, TILE_SIZE);
     }
-
-    // ========================= RENDER =========================
 
     public void render(Game game, double deltaTime) {
         globalTime += deltaTime;
