@@ -65,6 +65,7 @@ Cada archivo define el dinero inicial, la ruta que siguen los enemigos (una list
 Los tipos de enemigos válidos son `WEAK`, `FAST` y `TANK`.
 
 ## links videos
+(Aclaración: los videos muestran una versión vieja de la arquitectura del juego. Posterior a la grabación hicimos cambios/mejoras)
 
 https://youtu.be/vPXINI7Xvok?si=mdL1XQWhAbvfT--h
 
